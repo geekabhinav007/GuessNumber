@@ -18,7 +18,7 @@ document.querySelector('.check').addEventListener('click', function () {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
     }
-  } else if (guess > secretNumber) {
+  } else if (guess - secretNumber > 40 && guess > secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📈 Too high';
       score--;
@@ -27,9 +27,53 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.message').textContent = '😔 You lost the game!';
       document.querySelector('.score').textContent = 0;
     }
-  } else if (guess < secretNumber) {
+  } else if (
+    guess - secretNumber <= 40 &&
+    guess - secretNumber > 10 &&
+    guess > secretNumber
+  ) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📈 High';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '😔 You lost the game!';
+      document.querySelector('.score').textContent = 0;
+    }
+  } else if (guess - secretNumber <= 10 && guess > secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📈 Slightly high';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '😔 You lost the game!';
+      document.querySelector('.score').textContent = 0;
+    }
+  } else if (secretNumber - guess > 40 && secretNumber > guess) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📉 Too Low';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '😔 You lost the game!';
+      document.querySelector('.score').textContent = 0;
+    }
+  } else if (
+    secretNumber - guess <= 40 &&
+    secretNumber - guess > 10 &&
+    secretNumber > guess
+  ) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📉 Low';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '😔 You lost the game!';
+      document.querySelector('.score').textContent = 0;
+    }
+  } else if (secretNumber - guess <= 10 && secretNumber > guess) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📉 Slightly Low';
       score--;
       document.querySelector('.score').textContent = score;
     } else {
